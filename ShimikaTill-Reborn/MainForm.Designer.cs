@@ -40,13 +40,16 @@
             this.bt4 = new System.Windows.Forms.Button();
             this.bt5 = new System.Windows.Forms.Button();
             this.GOSettings = new System.Windows.Forms.Button();
-            this.InputJAN = new System.Windows.Forms.TextBox();
+            this.InputBarcode = new System.Windows.Forms.TextBox();
             this.ListProducts = new System.Windows.Forms.ListView();
             this.ProductsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.UntiPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Quantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Subtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Notification = new System.Windows.Forms.Label();
+            this.SubTotalLabel = new System.Windows.Forms.Label();
+            this.ItemLabel = new System.Windows.Forms.Label();
+            this.TotalLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelDate
@@ -154,14 +157,15 @@
             this.GOSettings.Text = "設定";
             this.GOSettings.UseVisualStyleBackColor = true;
             // 
-            // InputJAN
+            // InputBarcode
             // 
-            this.InputJAN.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.InputJAN.Location = new System.Drawing.Point(7, 517);
-            this.InputJAN.MaxLength = 13;
-            this.InputJAN.Name = "InputJAN";
-            this.InputJAN.Size = new System.Drawing.Size(654, 36);
-            this.InputJAN.TabIndex = 9;
+            this.InputBarcode.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.InputBarcode.Location = new System.Drawing.Point(7, 517);
+            this.InputBarcode.MaxLength = 13;
+            this.InputBarcode.Name = "InputBarcode";
+            this.InputBarcode.Size = new System.Drawing.Size(654, 36);
+            this.InputBarcode.TabIndex = 9;
+            this.InputBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBarcode_KeyDown);
             // 
             // ListProducts
             // 
@@ -212,6 +216,39 @@
             this.Notification.TabIndex = 11;
             this.Notification.Text = "Notification";
             // 
+            // SubTotalLabel
+            // 
+            this.SubTotalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SubTotalLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.SubTotalLabel.Location = new System.Drawing.Point(265, 472);
+            this.SubTotalLabel.Name = "SubTotalLabel";
+            this.SubTotalLabel.Size = new System.Drawing.Size(206, 30);
+            this.SubTotalLabel.TabIndex = 12;
+            this.SubTotalLabel.Text = "小計：0円";
+            this.SubTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ItemLabel
+            // 
+            this.ItemLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ItemLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ItemLabel.Location = new System.Drawing.Point(118, 472);
+            this.ItemLabel.Name = "ItemLabel";
+            this.ItemLabel.Size = new System.Drawing.Size(141, 30);
+            this.ItemLabel.TabIndex = 13;
+            this.ItemLabel.Text = "点数：0点";
+            this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.TotalLabel.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.TotalLabel.Location = new System.Drawing.Point(477, 472);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(295, 30);
+            this.TotalLabel.TabIndex = 14;
+            this.TotalLabel.Text = "合計：0円";
+            this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -219,9 +256,12 @@
             this.BackgroundImage = global::ShimikaTill_Reborn.Properties.Resources.BackGround;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.TotalLabel);
+            this.Controls.Add(this.ItemLabel);
+            this.Controls.Add(this.SubTotalLabel);
             this.Controls.Add(this.Notification);
             this.Controls.Add(this.ListProducts);
-            this.Controls.Add(this.InputJAN);
+            this.Controls.Add(this.InputBarcode);
             this.Controls.Add(this.GOSettings);
             this.Controls.Add(this.bt5);
             this.Controls.Add(this.bt4);
@@ -256,13 +296,16 @@
         private System.Windows.Forms.Button bt4;
         private System.Windows.Forms.Button bt5;
         private System.Windows.Forms.Button GOSettings;
-        private System.Windows.Forms.TextBox InputJAN;
+        private System.Windows.Forms.TextBox InputBarcode;
         private System.Windows.Forms.ListView ListProducts;
         private System.Windows.Forms.ColumnHeader ProductsName;
         private System.Windows.Forms.ColumnHeader UntiPrice;
         private System.Windows.Forms.ColumnHeader Quantity;
         private System.Windows.Forms.ColumnHeader Subtotal;
         private System.Windows.Forms.Label Notification;
+        private System.Windows.Forms.Label SubTotalLabel;
+        private System.Windows.Forms.Label ItemLabel;
+        private System.Windows.Forms.Label TotalLabel;
     }
 }
 
