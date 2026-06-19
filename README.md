@@ -1,8 +1,7 @@
-
 <img width="1280" height="350" alt="image" src="https://github.com/user-attachments/assets/9da54ddd-555f-45d2-9f45-70e3934afa18" />
 
 # ShimikaTill-Reborn
-<img width="1435" height="983" alt="image" src="https://github.com/user-attachments/assets/88e97b85-242f-4481-a419-90e645d50971" />
+<img width="1373" height="1036" alt="image" src="https://github.com/user-attachments/assets/4eafa6c8-25b9-4139-8478-e8ceb0aa10cb" />
 
 Open-source cash register software written in C# using the .NET Framework 4.8
 # System Requirements
