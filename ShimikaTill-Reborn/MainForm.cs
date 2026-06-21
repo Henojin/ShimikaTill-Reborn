@@ -7,9 +7,11 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ShimikaTill_Reborn
 {
@@ -185,6 +187,61 @@ namespace ShimikaTill_Reborn
             ListProducts.Items.Add(item);
 
             UpdateTotals();
+        }
+
+        private void GOSettings_Click(object sender, EventArgs e)
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
+        }
+
+        private void GoSoftKeyboard_Click(object sender, EventArgs e)
+        {
+            InputNumberForm InputNumberForm = new InputNumberForm(this);
+            InputNumberForm.SetMessage("JANコードを入力してください。");
+            InputNumberForm.ShowDialog();
+        }
+        public void SetBarcodeAndScan(string barcode)
+        {
+            InputBarcode.Text = barcode;
+            ScanBarcode(barcode);
+            InputBarcode.Clear();
+        }
+
+        private void bt1_Click(object sender, EventArgs e) //値引
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
+        }
+
+        private void bt2_Click(object sender, EventArgs e) //手動登録
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
+        }
+
+        private void bt3_Click(object sender, EventArgs e) //売上管理
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
+        }
+
+        private void bt4_Click(object sender, EventArgs e) //取消
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
+        }
+
+        private void bt5_Click(object sender, EventArgs e) //返品・返金
+        {
+            var dialog = new NotificationDialog();
+            dialog.SetMessage("");
+            dialog.ShowDialog();
         }
     }
 }

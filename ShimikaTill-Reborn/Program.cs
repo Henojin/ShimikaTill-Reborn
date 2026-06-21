@@ -24,7 +24,7 @@ namespace ShimikaTill_Reborn
                 splash.Show();
                 splash.Refresh();
                 CreateDatabase();
-                Thread.Sleep(1000); // ここは仮で秒数設定してます。
+                Thread.Sleep(500); // ここは仮で秒数設定してます。
             }
             Application.Run(new MainForm());
         }

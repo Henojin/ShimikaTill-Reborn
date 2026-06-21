@@ -143,9 +143,29 @@ namespace ShimikaTill_Reborn.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap close {
+            get {
+                object obj = ResourceManager.GetObject("close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap dialog {
             get {
                 object obj = ResourceManager.GetObject("dialog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap ImputFormBackGroundImage {
+            get {
+                object obj = ResourceManager.GetObject("ImputFormBackGroundImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

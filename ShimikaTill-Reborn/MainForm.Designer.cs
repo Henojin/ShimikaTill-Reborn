@@ -50,6 +50,7 @@
             this.SubTotalLabel = new System.Windows.Forms.Label();
             this.ItemLabel = new System.Windows.Forms.Label();
             this.TotalLabel = new System.Windows.Forms.Label();
+            this.GoSoftKeyboard = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelDate
@@ -101,6 +102,7 @@
             this.bt1.TabIndex = 3;
             this.bt1.Text = "値引";
             this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
             // 
             // bt2
             // 
@@ -112,6 +114,7 @@
             this.bt2.TabIndex = 4;
             this.bt2.Text = "手動登録";
             this.bt2.UseVisualStyleBackColor = true;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
             // 
             // bt3
             // 
@@ -123,6 +126,7 @@
             this.bt3.TabIndex = 5;
             this.bt3.Text = "売上管理";
             this.bt3.UseVisualStyleBackColor = true;
+            this.bt3.Click += new System.EventHandler(this.bt3_Click);
             // 
             // bt4
             // 
@@ -134,6 +138,7 @@
             this.bt4.TabIndex = 6;
             this.bt4.Text = "取消";
             this.bt4.UseVisualStyleBackColor = true;
+            this.bt4.Click += new System.EventHandler(this.bt4_Click);
             // 
             // bt5
             // 
@@ -145,6 +150,7 @@
             this.bt5.TabIndex = 7;
             this.bt5.Text = "返品/返金";
             this.bt5.UseVisualStyleBackColor = true;
+            this.bt5.Click += new System.EventHandler(this.bt5_Click);
             // 
             // GOSettings
             // 
@@ -156,14 +162,15 @@
             this.GOSettings.TabIndex = 8;
             this.GOSettings.Text = "設定";
             this.GOSettings.UseVisualStyleBackColor = true;
+            this.GOSettings.Click += new System.EventHandler(this.GOSettings_Click);
             // 
             // InputBarcode
             // 
             this.InputBarcode.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.InputBarcode.Location = new System.Drawing.Point(7, 517);
+            this.InputBarcode.Location = new System.Drawing.Point(56, 517);
             this.InputBarcode.MaxLength = 13;
             this.InputBarcode.Name = "InputBarcode";
-            this.InputBarcode.Size = new System.Drawing.Size(654, 36);
+            this.InputBarcode.Size = new System.Drawing.Size(605, 36);
             this.InputBarcode.TabIndex = 9;
             this.InputBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBarcode_KeyDown);
             // 
@@ -249,6 +256,17 @@
             this.TotalLabel.Text = "合計：0円";
             this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // GoSoftKeyboard
+            // 
+            this.GoSoftKeyboard.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.GoSoftKeyboard.Location = new System.Drawing.Point(1, 510);
+            this.GoSoftKeyboard.Name = "GoSoftKeyboard";
+            this.GoSoftKeyboard.Size = new System.Drawing.Size(50, 50);
+            this.GoSoftKeyboard.TabIndex = 15;
+            this.GoSoftKeyboard.Text = "⌨️";
+            this.GoSoftKeyboard.UseVisualStyleBackColor = true;
+            this.GoSoftKeyboard.Click += new System.EventHandler(this.GoSoftKeyboard_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -256,6 +274,7 @@
             this.BackgroundImage = global::ShimikaTill_Reborn.Properties.Resources.BackGround;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.GoSoftKeyboard);
             this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.ItemLabel);
             this.Controls.Add(this.SubTotalLabel);
@@ -296,7 +315,7 @@
         private System.Windows.Forms.Button bt4;
         private System.Windows.Forms.Button bt5;
         private System.Windows.Forms.Button GOSettings;
-        private System.Windows.Forms.TextBox InputBarcode;
+        public System.Windows.Forms.TextBox InputBarcode;
         private System.Windows.Forms.ListView ListProducts;
         private System.Windows.Forms.ColumnHeader ProductsName;
         private System.Windows.Forms.ColumnHeader UntiPrice;
@@ -306,6 +325,7 @@
         private System.Windows.Forms.Label SubTotalLabel;
         private System.Windows.Forms.Label ItemLabel;
         private System.Windows.Forms.Label TotalLabel;
+        private System.Windows.Forms.Button GoSoftKeyboard;
     }
 }
 

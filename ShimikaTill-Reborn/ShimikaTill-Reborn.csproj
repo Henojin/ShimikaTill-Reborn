@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InputNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputNumberForm.Designer.cs">
+      <DependentUpon>InputNumberForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="InputNumberForm.resx">
+      <DependentUpon>InputNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\close.png" />
     <None Include="Resources\dialog.png" />
     <None Include="Resources\button-grey.png" />
     <None Include="Resources\button-red1.png" />
