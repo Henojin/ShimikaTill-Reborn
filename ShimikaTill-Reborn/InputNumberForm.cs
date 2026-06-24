@@ -30,7 +30,9 @@ namespace ShimikaTill_Reborn
         public enum InputMode
         {
             Barcode,
-            ManualPrice
+            ManualPrice,
+            DiscountAmount,
+            DiscountRatio
         }
 
         private void InputNumberExit_Click(object sender, EventArgs e)

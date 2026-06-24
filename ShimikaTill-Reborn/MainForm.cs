@@ -231,8 +231,17 @@ namespace ShimikaTill_Reborn
 
         private void bt1_Click(object sender, EventArgs e) //値引
         {
-            var dialog = new NotificationDialog();
-            dialog.SetMessage("");
+            if (ListProducts.SelectedItems.Count == 0)
+            {
+                SystemSounds.Hand.Play();
+
+                var dialogError = new NotificationDialog();
+                dialogError.SetMessage("取り消す商品が選択されていません。");
+                dialogError.ShowDialog();
+                return;
+            }
+
+            var dialog = new SelectDiscountDialog();
             dialog.ShowDialog();
         }
 

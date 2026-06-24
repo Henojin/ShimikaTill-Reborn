@@ -186,6 +186,7 @@
             this.ListProducts.GridLines = true;
             this.ListProducts.HideSelection = false;
             this.ListProducts.Location = new System.Drawing.Point(118, 103);
+            this.ListProducts.MultiSelect = false;
             this.ListProducts.Name = "ListProducts";
             this.ListProducts.Size = new System.Drawing.Size(654, 367);
             this.ListProducts.TabIndex = 10;
@@ -195,7 +196,7 @@
             // ProductsName
             // 
             this.ProductsName.Text = "商品名";
-            this.ProductsName.Width = 350;
+            this.ProductsName.Width = 325;
             // 
             // UntiPrice
             // 
