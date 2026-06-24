@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlartDialog.Designer.cs">
+      <DependentUpon>AlartDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     <Compile Include="SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AlartDialog.resx">
+      <DependentUpon>AlartDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InputNumberForm.resx">
       <DependentUpon>InputNumberForm.cs</DependentUpon>
     </EmbeddedResource>

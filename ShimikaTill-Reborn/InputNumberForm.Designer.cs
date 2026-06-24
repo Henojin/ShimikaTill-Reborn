@@ -53,6 +53,7 @@
             this.InputNumber.Name = "InputNumber";
             this.InputNumber.Size = new System.Drawing.Size(576, 28);
             this.InputNumber.TabIndex = 0;
+            this.InputNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputNumber_KeyDown);
             this.InputNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputNumber_KeyPress);
             // 
             // Input1

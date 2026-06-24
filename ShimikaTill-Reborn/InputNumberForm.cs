@@ -14,10 +14,23 @@ namespace ShimikaTill_Reborn
     public partial class InputNumberForm : Form
     {
         private MainForm _mainForm;
-        public InputNumberForm(MainForm mainForm)
+        public InputNumberForm(MainForm mainForm, InputMode mode)
         {
             InitializeComponent();
             _mainForm = mainForm;
+            _mode = mode;
+        }
+
+        public string EnteredNumber
+        {
+            get { return InputNumber.Text.Trim(); }
+        }
+
+        private InputMode _mode;
+        public enum InputMode
+        {
+            Barcode,
+            ManualPrice
         }
 
         private void InputNumberExit_Click(object sender, EventArgs e)
@@ -91,9 +104,19 @@ namespace ShimikaTill_Reborn
         {
             string num = InputNumber.Text.Trim();
 
-            if (num != "")
+            if (num == "")
+            {
+                this.Close();
+                return;
+            }
+
+            if (_mode == InputMode.Barcode)
             {
                 _mainForm.SetBarcodeAndScan(num);
+            }
+            else if (_mode == InputMode.ManualPrice)
+            {
+                _mainForm.SetManualPrice(num);
             }
 
             this.Close();
@@ -104,6 +127,14 @@ namespace ShimikaTill_Reborn
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+            }
+        }
+
+        private void InputNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                InputEnter_Click(sender, e);
             }
         }
     }

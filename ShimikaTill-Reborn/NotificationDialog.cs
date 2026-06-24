@@ -18,12 +18,6 @@ namespace ShimikaTill_Reborn
             InitializeComponent();
         }
 
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            SystemSounds.Exclamation.Play();
-        }
-
         public void SetMessage(string message)
         {
             NotificationDialogLabel.Text = message;

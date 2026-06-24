@@ -5,11 +5,13 @@ using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ShimikaTill_Reborn.InputNumberForm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
@@ -25,23 +27,31 @@ namespace ShimikaTill_Reborn
             datetimer.Start();
         }
 
+        public void SetManualPrice(string num)
+        {
+            if (!int.TryParse(num, out int price))
+                return;
+
+            string name = "商品";
+            int quantity = 1;
+            int subtotal = price * quantity;
+
+            ListViewItem item = new ListViewItem(name);
+            item.SubItems.Add(price.ToString());
+            item.SubItems.Add(quantity.ToString());
+            item.SubItems.Add(subtotal.ToString());
+
+            item.Tag = 0;
+
+            ListProducts.Items.Add(item);
+
+            UpdateTotals();
+        }
+
         private void datetimer_Tick(object sender, EventArgs e)
         {
             labelDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
             labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
-        }
-
-        private void AddScannedItem(string ProductsName, int UnitPrice, int Quantity)
-        {
-            int Subtotal = UnitPrice * Quantity;
-
-            var item = new ListViewItem(ProductsName); // 商品名
-            item.SubItems.Add(UnitPrice.ToString());   // 単価
-            item.SubItems.Add(Quantity.ToString());    // 数量
-            item.SubItems.Add(Subtotal.ToString());    // 小計
-
-            ListProducts.Items.Add(item);
-            UpdateTotals();
         }
 
         private void UpdateTotals()
@@ -58,8 +68,7 @@ namespace ShimikaTill_Reborn
 
                 SubTotal += lineSubtotal;
 
-                var product = FindProductByBarcode(item.SubItems[0].Text);
-                int taxRate = product?.tax ?? 10;
+                int taxRate = (int)item.Tag;
 
                 int taxAmount = price * taxRate / 100;
                 int priceWithTax = price + taxAmount;
@@ -74,13 +83,9 @@ namespace ShimikaTill_Reborn
             TotalLabel.Text = $"合計：{Total} 円";
         }
 
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             Notification.Text = "ShimikaTillへようこそ！​\nJANコードを入力し、商品を登録してください。";
-            /// これはあくまでも仮です
-            AddScannedItem("りんご", 120, 1);
-            AddScannedItem("バナナ", 80, 2);
         }
         private (string name, int price, int tax, int check20)? FindProductByBarcode(string barcode)
         {
@@ -112,6 +117,16 @@ namespace ShimikaTill_Reborn
         }
         private void GOAccounting_Click(object sender, EventArgs e)
         {
+            if (ListProducts.Items.Count == 0)
+            {
+                SystemSounds.Hand.Play();
+                var dialogError = new NotificationDialog();
+                dialogError.SetMessage("商品が1つも登録されていません。");
+                dialogError.ShowDialog();
+                return;
+            }
+
+            SystemSounds.Exclamation.Play();
             var dialog = new NotificationDialog();
             // 仮です
             dialog.SetMessage("会計ボタンが押されました。\n登録された商品を削除します。");
@@ -142,6 +157,7 @@ namespace ShimikaTill_Reborn
 
             if (product == null)
             {
+                SystemSounds.Hand.Play();
                 var dialog = new NotificationDialog();
                 dialog.SetMessage("商品が見つかりません。");
                 dialog.ShowDialog();
@@ -155,6 +171,7 @@ namespace ShimikaTill_Reborn
 
             if (check20 == 1 && !ageWarningShown)
             {
+                SystemSounds.Exclamation.Play();
                 var dialog = new NotificationDialog();
                 dialog.SetMessage("年齢確認商品です。");
                 dialog.ShowDialog();
@@ -184,6 +201,8 @@ namespace ShimikaTill_Reborn
             item.SubItems.Add("1");
             item.SubItems.Add(subtotal.ToString());
 
+            item.Tag = tax;
+
             ListProducts.Items.Add(item);
 
             UpdateTotals();
@@ -198,9 +217,10 @@ namespace ShimikaTill_Reborn
 
         private void GoSoftKeyboard_Click(object sender, EventArgs e)
         {
-            InputNumberForm InputNumberForm = new InputNumberForm(this);
-            InputNumberForm.SetMessage("JANコードを入力してください。");
-            InputNumberForm.ShowDialog();
+            var form = new InputNumberForm(this, InputNumberForm.InputMode.Barcode);
+            form.SetMessage("JANコードを入力してください。");
+            form.ShowDialog();
+
         }
         public void SetBarcodeAndScan(string barcode)
         {
@@ -218,9 +238,9 @@ namespace ShimikaTill_Reborn
 
         private void bt2_Click(object sender, EventArgs e) //手動登録
         {
-            var dialog = new NotificationDialog();
-            dialog.SetMessage("");
-            dialog.ShowDialog();
+            var form = new InputNumberForm(this, InputMode.ManualPrice);
+            form.SetMessage("商品の価格を入力してください。");
+            form.ShowDialog();
         }
 
         private void bt3_Click(object sender, EventArgs e) //売上管理
@@ -232,9 +252,27 @@ namespace ShimikaTill_Reborn
 
         private void bt4_Click(object sender, EventArgs e) //取消
         {
-            var dialog = new NotificationDialog();
-            dialog.SetMessage("");
-            dialog.ShowDialog();
+            if (ListProducts.SelectedItems.Count == 0)
+            {
+                SystemSounds.Hand.Play();
+
+                var dialog = new NotificationDialog();
+                dialog.SetMessage("取り消す商品が選択されていません。");
+                dialog.ShowDialog();
+                return;
+            }
+
+            SystemSounds.Exclamation.Play();
+            var dialog2 = new AlartDialog();
+            dialog2.SetMessage("選択した商品を取り消しますか？");
+            dialog2.ShowDialog();
+
+            if (dialog2.Result)
+            {
+                var row = ListProducts.SelectedItems[0];
+                ListProducts.Items.Remove(row);
+                UpdateTotals();
+            }
         }
 
         private void bt5_Click(object sender, EventArgs e) //返品・返金
@@ -242,6 +280,19 @@ namespace ShimikaTill_Reborn
             var dialog = new NotificationDialog();
             dialog.SetMessage("");
             dialog.ShowDialog();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var dialog = new AlartDialog();
+            dialog.SetMessage("アプリを終了しますか？");
+
+            var result = dialog.ShowDialog();
+
+            if (dialog.Result == false)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
