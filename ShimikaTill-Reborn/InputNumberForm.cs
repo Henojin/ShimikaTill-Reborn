@@ -120,6 +120,14 @@ namespace ShimikaTill_Reborn
             {
                 _mainForm.SetManualPrice(num);
             }
+            else if (_mode == InputMode.DiscountAmount)
+            {
+                _mainForm.SetDiscountAmount(num);
+            }
+            else if (_mode == InputMode.DiscountRatio)
+            {
+                _mainForm.SetDiscountRatio(num);
+            }
 
             this.Close();
         }

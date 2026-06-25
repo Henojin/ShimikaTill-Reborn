@@ -41,9 +41,9 @@
             this.DiscountDialogLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DiscountDialogLabel.Location = new System.Drawing.Point(108, 38);
             this.DiscountDialogLabel.Name = "DiscountDialogLabel";
-            this.DiscountDialogLabel.Size = new System.Drawing.Size(185, 16);
+            this.DiscountDialogLabel.Size = new System.Drawing.Size(196, 16);
             this.DiscountDialogLabel.TabIndex = 0;
-            this.DiscountDialogLabel.Text = "値引方法を選択してください";
+            this.DiscountDialogLabel.Text = "値引方法を選択してください。";
             // 
             // SelectDiscountExitButton
             // 

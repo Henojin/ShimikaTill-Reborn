@@ -48,6 +48,49 @@ namespace ShimikaTill_Reborn
             UpdateTotals();
         }
 
+        public void SetDiscountAmount(string num)
+        {
+            if (!int.TryParse(num, out int discountAmount) || ListProducts.SelectedItems.Count == 0) return;
+
+            foreach (ListViewItem row in ListProducts.SelectedItems)
+            {
+                int currentPrice = int.Parse(row.SubItems[1].Text);
+                int quantity = int.Parse(row.SubItems[2].Text);
+
+                int newUnitPrice = Math.Max(0, currentPrice - discountAmount);
+
+                int newSubtotal = newUnitPrice * quantity;
+
+                row.SubItems[1].Text = newUnitPrice.ToString();
+                row.SubItems[3].Text = newSubtotal.ToString();
+            }
+            UpdateTotals();
+        }
+
+        public void SetDiscountRatio(string num)
+        {
+            if (!int.TryParse(num, out int discountRatio) || ListProducts.SelectedItems.Count == 0) return;
+
+            foreach (ListViewItem row in ListProducts.SelectedItems)
+            {
+                int currentPrice = int.Parse(row.SubItems[1].Text);
+                int quantity = int.Parse(row.SubItems[2].Text);
+
+                double discounted = currentPrice * (1.0 - (double)discountRatio / 100.0);
+                int newUnitPrice = (int)Math.Floor(discounted);
+
+                newUnitPrice = Math.Max(0, newUnitPrice);
+
+                int newSubtotal = newUnitPrice * quantity;
+
+                row.SubItems[1].Text = newUnitPrice.ToString();
+                row.SubItems[3].Text = newSubtotal.ToString();
+            }
+
+            UpdateTotals();
+        }
+
+
         private void datetimer_Tick(object sender, EventArgs e)
         {
             labelDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
@@ -236,13 +279,13 @@ namespace ShimikaTill_Reborn
                 SystemSounds.Hand.Play();
 
                 var dialogError = new NotificationDialog();
-                dialogError.SetMessage("取り消す商品が選択されていません。");
+                dialogError.SetMessage("値引きする商品が選択されていません。");
                 dialogError.ShowDialog();
                 return;
             }
 
             var dialog = new SelectDiscountDialog();
-            dialog.ShowDialog();
+            dialog.ShowDialog(this);
         }
 
         private void bt2_Click(object sender, EventArgs e) //手動登録
